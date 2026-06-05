@@ -1,22 +1,41 @@
-# Documentation Libraries
+# Build Your Own
 
-A collection of self-contained, publish-ready documentation libraries. Each subdirectory is one complete library — a guided, dependency-ordered set of teaching chapters in portable Markdown that you can read on GitHub or render with MkDocs, Docusaurus, or Astro Starlight.
+A collection of **build-it-yourself documentation libraries**. Each one teaches you to build a real piece of software from scratch, one motivated step at a time — no prior expertise assumed, nothing hidden behind a framework you can't see into.
+
+Every library is self-contained, portable Markdown: read it straight on GitHub, or render it with MkDocs, Docusaurus, or Astro Starlight.
 
 ## Libraries
 
-| Library | What it covers |
+| Library | Build your own… |
 |---|---|
-| [ai-agent-101_docs](ai-agent-101_docs/README.md) | **Build an AI Coding Agent from Scratch** — a 34-chapter course that builds a terminal coding agent from the ground up: the LLM toolkit, the agent loop, the terminal UI, and the full coding-agent composition with tools, sessions, extensions, and multi-agent orchestration. |
+| [ai-agent-101_docs](ai-agent-101_docs/README.md) | **AI coding agent.** A 34-chapter course that builds a terminal coding agent from the ground up: the LLM toolkit, the agent loop, the terminal UI, and the full coding-agent composition with tools, sessions, extensions, and multi-agent orchestration. |
 
-## Conventions
+More libraries will land here over time — each in its own folder.
 
-Every library in this repository follows the same rules:
+## What makes these different
 
-- **Portable Markdown** — plain GitHub-Flavored Markdown; no framework-specific components, so it renders anywhere.
-- **Self-contained chapters** — each page introduces the terms it uses and can be read without any source repository open.
-- **Guided reading spine** — chapters are ordered foundation-first, with prev/next links and an `index.md` landing map per library.
-- **Brand- and version-agnostic** — examples use generic names and minimal starting versions; nothing depends on a specific upstream.
+- **You build it, step by step.** Each chapter starts from the problem it solves, then arrives at the solution — never a finished-code dump you can't follow.
+- **Self-contained chapters.** Every term is introduced on first use; you can read any page without the source repository open.
+- **A guided reading spine.** Chapters are ordered foundation-first, with prev/next links and an `index.md` landing map per library.
+- **Brand- and version-agnostic.** Examples use generic names and minimal starting versions, so nothing is tied to a specific upstream — the concepts are yours to reuse.
+
+## How to read a library
+
+1. Open the library's folder and start at its `README.md` or `index.md`.
+2. Follow the chapters in order — each builds on the ones before it.
+3. Use the prev/next links at the bottom of each chapter to move through it like a book.
+
+## Repository layout
+
+```
+.
+├── README.md              ← you are here (the collection index)
+└── <name>_docs/           ← one self-contained library per folder
+    ├── README.md          ← that library's front page
+    ├── index.md           ← that library's reading map
+    └── docs/...           ← the chapters
+```
 
 ## Adding a library
 
-Each library lives in its own `*_docs/` directory with its own `README.md` and `index.md`. Add a new one as a sibling folder here and link it from the table above.
+Create a new `<name>_docs/` folder as a sibling here, give it its own `README.md` and `index.md`, and add a row to the **Libraries** table above.
