@@ -25,7 +25,7 @@ We will work through four concerns in sequence:
 
 Before we look at files, it is worth asking: why put all four packages in one repository rather than four separate ones?
 
-The answer is that our layers depend on each other at *development time*. When we change a type in `llm-toolkit`, we need `agent-core` to pick up that change immediately — not after publishing to a registry, waiting for a version bump, and running `npm install` in every downstream package. A monorepo with npm workspaces gives us *symlinked local packages*: Node resolves `llm-toolkit` to `packages/ai/` in the same checkout, so a rebuild of one package is visible to all dependents straight away.
+The answer is that our layers depend on each other at *development time*. When we change a type in `llm-toolkit`, we need `agent-core` to pick up that change immediately — not after publishing to a registry, waiting for a version bump, and running `npm install` in every downstream package. A monorepo with npm workspaces gives us *symlinked local packages*: Node resolves `llm-toolkit` to `packages/llm-toolkit/` in the same checkout, so a rebuild of one package is visible to all dependents straight away.
 
 ## The workspace layout
 
@@ -44,10 +44,10 @@ The root `package.json` declares which directories participate in the workspace 
 
 The `"workspaces": ["packages/*"]` glob tells npm to treat every subdirectory of `packages/` as a workspace member. In practice that means four packages:
 
-| Directory | Generic name | Role |
+| Directory | Package name | Role |
 |---|---|---|
-| `packages/ai/` | `llm-toolkit` | Streaming LLM client and provider abstraction |
-| `packages/agent/` | `agent-core` | Generic agent loop, session, and harness |
+| `packages/llm-toolkit/` | `llm-toolkit` | Streaming LLM client and provider abstraction |
+| `packages/agent-core/` | `agent-core` | Generic agent loop, session, and harness |
 | `packages/tui/` | `tui` | Terminal UI with differential rendering |
 | `packages/coding-agent/` | `coding-agent` | The CLI tool that wires all three together |
 
@@ -158,7 +158,7 @@ Now that the four packages share a TypeScript config, we need the upper layers t
 
 ### `agent-core` depends on `llm-toolkit`
 
-`agent-core` (at `packages/agent/`) lists `llm-toolkit` as a runtime dependency (S25):
+`agent-core` (at `packages/agent-core/`) lists `llm-toolkit` as a runtime dependency (S25):
 
 ```json
 {
@@ -171,7 +171,7 @@ Now that the four packages share a TypeScript config, we need the upper layers t
 
 > Note: the version numbers in this chapter are minimal starting values for a brand-new project — `0.1.0` is the conventional first version, and `^0.1.0` is a semver range that permits compatible minor and patch updates. Pick whatever versions you like; nothing here depends on a specific one.
 
-Because npm workspaces symlink local packages, `"llm-toolkit": "^0.1.0"` resolves to `packages/ai/` on disk rather than reaching out to a registry — as long as the version in `packages/ai/package.json` satisfies the range. This is how `agent-core` gets live, un-published access to the layer below it.
+Because npm workspaces symlink local packages, `"llm-toolkit": "^0.1.0"` resolves to `packages/llm-toolkit/` on disk rather than reaching out to a registry — as long as the version in `packages/llm-toolkit/package.json` satisfies the range. This is how `agent-core` gets live, un-published access to the layer below it.
 
 The full dependency declaration for `agent-core` also lists three runtime libraries it needs directly (S25):
 
@@ -256,7 +256,7 @@ Building the monorepo is not as simple as running one command at the root — Ty
 ```json
 {
   "scripts": {
-    "build": "cd packages/tui && npm run build && cd ../ai && npm run build && cd ../agent && npm run build && cd ../coding-agent && npm run build"
+    "build": "cd packages/tui && npm run build && cd ../llm-toolkit && npm run build && cd ../agent-core && npm run build && cd ../coding-agent && npm run build"
   }
 }
 ```
@@ -264,8 +264,8 @@ Building the monorepo is not as simple as running one command at the root — Ty
 Working through this command:
 
 1. Build `tui` first (it has no inter-package dependencies, so it is safe to build in any position, but it is conventionally built first).
-2. Build `llm-toolkit` (`packages/ai/`).
-3. Build `agent-core` (`packages/agent/`), which can now find the compiled `llm-toolkit`.
+2. Build `llm-toolkit` (`packages/llm-toolkit/`).
+3. Build `agent-core` (`packages/agent-core/`), which can now find the compiled `llm-toolkit`.
 4. Build `coding-agent` (`packages/coding-agent/`), which can now find all three compiled layers.
 
 Each package's own `build` script calls `tsgo` (the Go-based TypeScript compiler) with its local `tsconfig.build.json`. `coding-agent` also runs `shx chmod +x dist/cli.js` to make the CLI executable and copies static assets (themes, templates) into `dist/`.
@@ -279,7 +279,7 @@ npm run build
 To build a single package — useful during development when you know only one layer changed:
 
 ```bash
-cd packages/ai && npm run build
+cd packages/llm-toolkit && npm run build
 ```
 
 ### The test script

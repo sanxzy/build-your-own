@@ -96,8 +96,8 @@ The four layers form a directed acyclic graph (DAG). Each layer can only be buil
 ```bash
 # From the root build script (S3)
 cd packages/tui && npm run build
-cd ../ai && npm run build      # llm-toolkit
-cd ../agent && npm run build   # agent-core
+cd ../llm-toolkit && npm run build
+cd ../agent-core && npm run build
 cd ../coding-agent && npm run build
 ```
 
@@ -124,10 +124,10 @@ The project lives in a TypeScript monorepo managed with npm workspaces. The `pac
 
 The four core packages live under `packages/`:
 
-| Directory | Generic name | What it is |
+| Directory | Package name | What it is |
 |---|---|---|
-| `packages/ai/` | `llm-toolkit` | Unified LLM API layer |
-| `packages/agent/` | `agent-core` | Agent loop and state management |
+| `packages/llm-toolkit/` | `llm-toolkit` | Unified LLM API layer |
+| `packages/agent-core/` | `agent-core` | Agent loop and state management |
 | `packages/tui/` | `tui` | Terminal UI with differential rendering |
 | `packages/coding-agent/` | `coding-agent` | Full interactive coding agent CLI |
 
