@@ -9,6 +9,7 @@ Every library is self-contained, portable Markdown: read it straight on GitHub, 
 | Library | Build your own… |
 |---|---|
 | [ai-agent-101_docs](ai-agent-101_docs/README.md) | **AI coding agent.** A 34-chapter course that builds a terminal coding agent from the ground up: the LLM toolkit, the agent loop, the terminal UI, and the full coding-agent composition with tools, sessions, extensions, and multi-agent orchestration. |
+| [agent-swarm-101_docs](agent-swarm-101_docs/README.md) | **AI agent swarm.** A 23-chapter course that builds a multi-agent orchestration system from scratch: the adapter interface (mock, LLM, process, HTTP), a task queue with atomic claim and crash recovery, coordination (org chart, squads, agent-to-agent comms), real-time WebSocket streaming, scheduling, and spend governance. Runs keyless on a built-in mock adapter. |
 
 More libraries will land here over time — each in its own folder.
 
