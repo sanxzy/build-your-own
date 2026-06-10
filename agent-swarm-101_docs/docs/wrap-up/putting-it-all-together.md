@@ -191,6 +191,8 @@ startRunner({
 
 Once connected, the runner appears in `hub.byRunner["rt_abc123"]`. Any wakeup the server sends for that runner ID lands in the runner's WebSocket read loop.
 
+> **These are two processes, not two machines.** "Separate process" does not mean "separate computer." For this capstone — and for any local or small personal swarm — you run both on the same laptop: start the orchestrator in one terminal (`npm run dev`, the script from [Prerequisites and Project Setup](../getting-started/project-setup.md)), start the runner in a second terminal (`tsx src/runner/main.ts`, the entry point shown just above), and the runner reaches the orchestrator over `ws://localhost:8080`. The agents that runner spawns execute on that same machine too. One laptop holds the whole swarm: orchestrator, runner, and every agent. (This is the point made back in [What Is an Agent Swarm?](../getting-started/what-is-a-swarm.md) — the four roles are responsibilities, not hardware.) Moving the runner to a cloud VM or another laptop later changes only the URL it dials; nothing in the code above changes.
+
 **The dual-path design.** Push hint plus HTTP claim is the design established in [the runner hub chapter](../real-time/runner-hub.md): the push eliminates latency on the hot path, but the periodic poll remains the correctness backstop. The runner does not need to change its claim logic — the wakeup just tells it "now is a good time."
 
 ---

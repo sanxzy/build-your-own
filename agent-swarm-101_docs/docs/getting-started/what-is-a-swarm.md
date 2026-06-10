@@ -96,6 +96,14 @@ Here is how the four roles relate to each other:
 
 Each runner is connected to one orchestrator. Each agent is backed by an adapter. Each task has exactly one assignee at a time.
 
+### One machine or many — that diagram is logical, not physical
+
+The diagram above shows runners on a laptop, a cloud VM, and a second laptop, which makes it look like you need a fleet of machines to run a swarm. You do not. The four roles are *logical* — they describe responsibilities, not separate computers. The orchestrator is a process, each runner is a process, and an agent run is a process the runner spawns. Nothing stops all of those processes from living on one device.
+
+In fact, that is exactly how you will work through this entire book: on a single laptop, you start the orchestrator in one terminal, start a runner in another (it connects to the orchestrator over `localhost`), and the agents that runner manages execute right there on the same machine. One device, the whole swarm inside it — orchestrator, runner, and every agent. This is the normal setup for development and for small, personal swarms, and it is enough to build and run everything in the chapters ahead.
+
+What the multi-machine picture buys you is *scale and placement*, and it is something you grow into rather than start with. Because the orchestrator and runners talk over a network connection instead of sharing memory, you can later move a runner onto a cloud VM (so agents keep working when your laptop sleeps), or onto a colleague's laptop (to borrow its CPU), or onto a machine with special network access — and the orchestrator does not change at all. It still sees "a runner connected, here is its capacity." The single-device setup and the spread-across-the-world setup are the *same architecture*; the only difference is where each process happens to run. Start with everything on one machine; distribute later only when a real need — capacity, uptime, or isolation — pushes you to.
+
 ## The squad topology — agents that delegate
 
 We have described agents as individual workers. But teams have structure: some agents do hands-on work, others direct and coordinate.
