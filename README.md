@@ -8,8 +8,9 @@ Every library is self-contained, portable Markdown: read it straight on GitHub, 
 
 | Library | Build your own… |
 |---|---|
-| [ai-agent-101_docs](ai-agent-101_docs/README.md) | **AI coding agent.** A 34-chapter course that builds a terminal coding agent from the ground up: the LLM toolkit, the agent loop, the terminal UI, and the full coding-agent composition with tools, sessions, extensions, and multi-agent orchestration. |
-| [agent-swarm-101_docs](agent-swarm-101_docs/README.md) | **AI agent swarm.** A 23-chapter course that builds a multi-agent orchestration system from scratch: the adapter interface (mock, LLM, process, HTTP), a task queue with atomic claim and crash recovery, coordination (org chart, squads, agent-to-agent comms), real-time WebSocket streaming, scheduling, and spend governance. Runs keyless on a built-in mock adapter. |
+| [xzy_agent_docs](xzy_agent_docs/README.md) | **AI coding agent.** A 34-chapter course that builds a terminal coding agent from the ground up: the LLM toolkit, the agent loop, the terminal UI, and the full coding-agent composition with tools, sessions, extensions, and multi-agent orchestration. |
+| [hermes-agent_docs](hermes-agent_docs/README.md) | **Self-improving AI agent.** A 42-chapter, beginner-first guide to Hermes Agent v0.16.0: the conversation loop, five memory layers, autonomy (cron/webhooks/dispatcher), multi-agent kanban and swarm topologies, the provider/credential system, the closed learning loop, the OS security model, and the full extension surface — every claim traced to source. |
+| [openclaw_docs](openclaw_docs/README.md) | **Self-hosted AI gateway.** A 27-chapter guide to OpenClaw, a multi-channel AI gateway you run yourself: the control-plane gateway and wire protocol, channels and DM pairing, the agent loop and sessions, the memory system, the plugin/skill/tool primitives, model integration and fallback, multi-agent coordination, automation, and operations — configuration, storage, security, observability, and deployment. |
 
 More libraries will land here over time — each in its own folder.
 
